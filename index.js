@@ -1,5 +1,14 @@
 const WebSocket	= require('ws');
-const socketServer = new WebSocket.Server({port: 8080});
+const express	= require('express');
+
+const port = process.env.PORT || "8080";
+console.log(`Server listening on port ${port}`);
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(port, () => console.log(`Listening on ${ port }`));
+
+const socketServer = new WebSocket.Server({ server });
 
 var connectionNumber = 0;
 var chatReady = false;
@@ -59,5 +68,3 @@ socketServer.on('connection', function connection(ws) {
     }
 });
 
-const port = process.env.PORT || "8080";
-console.log(`Server listening on port ${port}`);
