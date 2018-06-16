@@ -59,4 +59,5 @@ socketServer.on('connection', function connection(ws) {
     }
 });
 
-console.log("Server listening on port 8080");
+const port = process.env.PORT || "8080";
+console.log(`Server listening on port ${port}`);
